@@ -8,9 +8,9 @@
     "react-dom": "^18.0.2"
   },
   "scripts": {
-    "dev": "webpack-dev-server --mode development",
-    "build": "webpack --mode production",
-    "build:analyze": "webpack --mode production --env analyze",
+    "dev": "webpack-dev-server --mode development --config config/webpack.config.js",
+    "build": "webpack --mode production --config config/webpack.config.js",
+    "build:analyze": "webpack --mode production --env analyze --config config/webpack.config.js",
     "preview": "serve dist/",
     "lint": "eslint --ext js,jsx,ts,tsx src/",
     "lint:fix": "eslint --fix --ext js,jsx,ts,tsx src/",

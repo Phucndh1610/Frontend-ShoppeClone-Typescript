@@ -26,7 +26,7 @@ module.exports = (env, argv) => {
       extensions: ['.tsx', '.ts', '.jsx', '.js']
     },
     // File đầu vào cho webpack, file này thường là file import mọi file khác
-    entry: ['../src/index.tsx'],
+    entry: ['./src/index.tsx'],
     // Khai báo các module dùng trong webpack
     module: {
       rules: [
@@ -76,7 +76,7 @@ module.exports = (env, argv) => {
 
     output: {
       filename: 'static/js/main.[contenthash:6].js', // Thêm mã hash tên file dựa vào content để tránh bị cache bởi CDN hay browser.
-      path: path.resolve(__dirname, 'dist'), // Build ra thư mục dist
+      path: path.resolve(__dirname, '../dist'), // Build ra thư mục dist
       publicPath: '/',
       clean: true
     },
@@ -86,7 +86,7 @@ module.exports = (env, argv) => {
       historyApiFallback: true, // Phải set true nếu không khi bạn dùng lazyload module React thì sẽ gặp lỗi không load được file.
       // Cấu hình phục vụ file html trong public
       static: {
-        directory: path.resolve(__dirname, 'public', 'index.html'),
+        directory: path.resolve(__dirname, '../public', 'index.html'),
         serveIndex: true,
         watch: true // khi thay đổi content trong index.html thì cũng sẽ reload
       }
@@ -114,7 +114,7 @@ module.exports = (env, argv) => {
 
       // Plugin hỗ trợ thêm thẻ style và script vào index.html
       new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, 'public', 'index.html'),
+        template: path.resolve(__dirname, '../public', 'index.html'),
         filename: 'index.html'
       }),
       // Thêm eslint cho webpack
