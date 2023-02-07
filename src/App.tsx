@@ -1,10 +1,12 @@
 import { FC } from 'react'
-// import reactlogo from './assets/images/react.svg'
-// import './assets/styles/app.css'
-// import './assets/styles/app.scss'
+import Example from './header'
 
 const App: FC = () => {
-  return <div>build webpack</div>
+  return (
+    <>
+      <Example />
+    </>
+  )
 }
 
 export default App
