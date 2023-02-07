@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
@@ -31,26 +32,42 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.tsx?$/, // duyệt các file .ts || .tsx
+          // duyệt các file .ts || .tsx
+          test: /\.tsx?$/,
+          // Giúp dịch code TS, React sang JS,
+          use: ['babel-loader'],
           exclude: /node_modules/,
-          use: ['babel-loader'] // Giúp dịch code TS, React sang JS,
         },
         {
-          test: /\.(s[ac]ss|css)$/, // duyệt các file sass || scss || css
+          test: /\.tsx?$/,
+          loader: 'ts-loader',
+          exclude: /node_modules/,
+          include: path.resolve(__dirname, './src')
+        },
+        {
+          // duyệt các file sass || scss || css
+          test: /\.(s[ac]ss|css)$/,
           use: [
             MiniCssExtractPlugin.loader,
             {
-              loader: 'css-loader', // dùng import 'filename.css' trong file tsx, ts
-              options: { sourceMap: !isProduction } // Hiển thị sourcemap ở môi trường dev cho dễ debug
+              // dùng import 'filename.css' trong file tsx, ts
+              loader: 'css-loader',
+              // Hiển thị sourcemap ở môi trường dev cho dễ debug
+              options: { sourceMap: !isProduction }
             },
             {
-              loader: 'sass-loader', // biên dịch sass sang css
+              // biên dịch sass sang css
+              loader: 'sass-loader',
               options: { sourceMap: !isProduction }
+            },
+            {
+              loader: 'postcss-loader'
             }
           ]
         },
         {
-          test: /\.(png|svg|jpg|gif)$/, // Dùng để import file ảnh, nếu có video/ảnh định dạng khác thì thêm vào đây
+          // Dùng để import file ảnh, nếu có video/ảnh định dạng khác thì thêm vào đây
+          test: /\.(png|svg|jpg|gif)$/,
           use: [
             {
               loader: 'file-loader',
@@ -61,7 +78,8 @@ module.exports = (env, argv) => {
           ]
         },
         {
-          test: /\.(eot|ttf|woff|woff2)$/, // Dùng để import font
+          // Dùng để import font
+          test: /\.(eot|ttf|woff|woff2)$/,
           use: [
             {
               loader: 'file-loader',
@@ -75,20 +93,26 @@ module.exports = (env, argv) => {
     },
 
     output: {
-      filename: 'static/js/main.[contenthash:6].js', // Thêm mã hash tên file dựa vào content để tránh bị cache bởi CDN hay browser.
-      path: path.resolve(__dirname, '../dist'), // Build ra thư mục dist
+      // Thêm mã hash tên file dựa vào content để tránh bị cache bởi CDN hay browser.
+      filename: 'static/js/main.[contenthash:6].js',
+      // Build ra thư mục build
+      path: path.resolve(__dirname, '../build'),
       publicPath: '/',
       clean: true
     },
     devServer: {
-      hot: true, // enable Hot Module Replacement, kiểu như reload nhanh
-      port: 3000, // Chạy port 3000 khi dev
-      historyApiFallback: true, // Phải set true nếu không khi bạn dùng lazyload module React thì sẽ gặp lỗi không load được file.
+      // enable Hot Module Replacement, kiểu như reload nhanh
+      hot: true,
+      // Chạy port 3000 khi dev
+      port: 3000,
+      // Phải set true nếu không khi bạn dùng lazyload module React thì sẽ gặp lỗi không load được file.
+      historyApiFallback: true,
       // Cấu hình phục vụ file html trong public
       static: {
         directory: path.resolve(__dirname, '../public', 'index.html'),
         serveIndex: true,
-        watch: true // khi thay đổi content trong index.html thì cũng sẽ reload
+        // khi thay đổi content trong index.html thì cũng sẽ reload
+        watch: true
       }
     },
     devtool: isProduction ? false : 'source-map',
@@ -128,22 +152,45 @@ module.exports = (env, argv) => {
   if (isProduction) {
     config.plugins = [
       ...config.plugins,
-      new webpack.ProgressPlugin(), // Hiển thị % khi build
+      // Hiển thị % khi build
+      new webpack.ProgressPlugin(),
       // Nén brotli css và js nhưng không hiểu sao chỉ có js được nén 🥲
       new CompressionPlugin({
         test: /\.(css|js)$/,
         algorithm: 'brotliCompress'
       }),
-      new CleanWebpackPlugin() // Dọn dẹp thư mục build trước đó để chuẩn bị cho bản build hiện tại
+      // Dọn dẹp thư mục build trước đó để chuẩn bị cho bản build hiện tại
+      new CleanWebpackPlugin()
     ]
     if (isAnalyze) {
       config.plugins = [...config.plugins, new BundleAnalyzerPlugin()]
     }
     config.optimization = {
+      // minimizer: [
+      //   `...`, // Cú pháp kế thừa bộ minimizers mặc định trong webpack 5 (i.e. `terser-webpack-plugin`)
+      //   new CssMinimizerPlugin() // minify css
+      // ]
+      minimize: true,
       minimizer: [
-        `...`, // Cú pháp kế thừa bộ minimizers mặc định trong webpack 5 (i.e. `terser-webpack-plugin`)
-        new CssMinimizerPlugin() // minify css
+        new TerserPlugin({
+          // Sử dụng chạy song song nhiều quy trình để cải thiện tốc độ xây dựng
+          parallel: 4,
+          extractComments: false,
+          terserOptions: {
+            format: {
+              comments: false
+            },
+            compress: {
+              drop_console: true
+            }
+          }
+        })
       ]
+    }
+    config.performance = {
+      hints: false,
+      maxEntrypointSize: 512000,
+      maxAssetSize: 512000
     }
   }
   return config
