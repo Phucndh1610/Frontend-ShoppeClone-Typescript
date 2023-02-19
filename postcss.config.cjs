@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const tailwindcss = require('tailwindcss');
+const tailwindcss = require('tailwindcss')
 module.exports = {
-  plugins: [
-    'postcss-preset-env',
-    tailwindcss
-  ]
+  plugins: ['postcss-preset-env', tailwindcss]
 }

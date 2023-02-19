@@ -36,7 +36,7 @@ module.exports = (env, argv) => {
           test: /\.tsx?$/,
           // Giúp dịch code TS, React sang JS,
           use: ['babel-loader'],
-          exclude: /node_modules/,
+          exclude: /node_modules/
         },
         {
           test: /\.tsx?$/,

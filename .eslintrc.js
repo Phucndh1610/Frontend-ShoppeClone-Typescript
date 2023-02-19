@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 module.exports = {
+  parser: '@typescript-eslint/parser',
+  root: true,
   extends: [
     // Chúng ta sẽ dùng các rule mặc định từ các plugin mà chúng ta đã cài.
     'eslint:recommended',
@@ -20,6 +22,9 @@ module.exports = {
       // Nói eslint-plugin-react tự động biết version của React.
       version: 'detect'
     },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.js', '.jsx', '.ts', '.tsx']
+    },
     // Nói ESLint cách xử lý các import
     'import/resolver': {
       node: {
@@ -29,7 +34,8 @@ module.exports = {
     }
   },
   env: {
-    node: true
+    node: true,
+    es6: true
   },
   rules: {
     // Tắt rule yêu cầu import React trong file jsx
