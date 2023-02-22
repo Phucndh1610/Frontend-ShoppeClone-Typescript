@@ -11,6 +11,9 @@ module.exports = {
     extend: {
       colors: {
         orange: '#ee4d2d'
+      },
+      screens: {
+        sml: '100px'
       }
     }
   },

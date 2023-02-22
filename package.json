@@ -4,10 +4,19 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@hookform/resolvers": "^2.9.11",
     "@tailwindcss/line-clamp": "^0.4.2",
+    "@tanstack/react-query": "^4.24.10",
+    "@tanstack/react-query-devtools": "^4.15.0",
+    "@types/lodash": "^4.14.191",
+    "axios": "^1.1.3",
+    "dotenv": "^16.0.3",
+    "lodash": "^4.17.21",
     "react": "^18.0.2",
     "react-dom": "^18.0.2",
-    "react-router-dom": "^6.8.1"
+    "react-hook-form": "^7.43.1",
+    "react-router-dom": "^6.8.1",
+    "yup": "^1.0.0"
   },
   "scripts": {
     "dev": "webpack-dev-server --mode development --config config/webpack.config.js",
@@ -37,6 +46,7 @@
     "dotenv-webpack": "^8.0.1",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "^4.2.1",

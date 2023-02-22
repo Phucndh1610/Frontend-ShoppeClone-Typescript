@@ -16,13 +16,18 @@
     "noEmit": true,
     "jsx": "preserve",
     "strictNullChecks": false,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@Components/*": ["src/components/*"],
-      "@/*": ["/*"]
+      "@Utils/*": ["src/utils/*"],
+      "@Pages/*": ["src/pages/*"],
+      "@Layouts/*": ["src/layouts/*"],
+      "@Assets/*": ["src/assets/*"],
+      "@Types/*": ["src/types/*"],
+      "@Apis/*": ["src/apis/*"]
     }
   },
   // "include": ["src"]
   "include": ["./src/**/*.ts", "./src/**/*.tsx", "./src/**/*.d.ts"],
-  "exclude": ["node_modules", "build"]
+  "exclude": ["node_modules"]
 }
