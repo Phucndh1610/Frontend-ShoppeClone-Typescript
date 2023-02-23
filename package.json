@@ -21,7 +21,6 @@
   "scripts": {
     "dev": "webpack-dev-server --config config/webpack.dev.js",
     "build": "webpack-cli --config config/webpack.prod.js",
-    "build:analyze": "webpack --mode production --env analyze --config config/webpack.config.js",
     "preview": "serve build/",
     "lint": "eslint --ext js,jsx,ts,tsx src/",
     "lint:fix": "eslint --fix --ext js,jsx,ts,tsx src/",
