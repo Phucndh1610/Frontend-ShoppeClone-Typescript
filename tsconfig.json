@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
+    "target": "ES6",
+    "module": "esnext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": true,
@@ -9,13 +10,13 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "CommonJS",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
     "strictNullChecks": true,
+    "sourceMap": true,
     "baseUrl": ".",
     "paths": {
       "@Components/*": ["src/components/*"],
@@ -27,7 +28,6 @@
       "@Apis/*": ["src/apis/*"]
     }
   },
-  // "include": ["src"]
   "include": ["./src/**/*.ts", "./src/**/*.tsx", "./src/**/*.d.ts"],
   "exclude": ["node_modules"]
 }
