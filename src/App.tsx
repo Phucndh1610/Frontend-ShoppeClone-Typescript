@@ -1,12 +1,6 @@
-import { FC } from 'react'
-import Example from './header'
+import useRouterElements from '../src/router/useRouterElement'
 
-const App: FC = () => {
-  return (
-    <>
-      <Example />
-    </>
-  )
+export default function App() {
+  const routeElements = useRouterElements()
+  return <div>{routeElements}</div>
 }
-
-export default App
