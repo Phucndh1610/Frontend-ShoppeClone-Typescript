@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin').TsconfigPathsPlugin
 const ESLintPlugin = require('eslint-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   // file đầu vào cho webpack, file này import bao gồm các file khác
@@ -20,12 +19,7 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin()]
   },
   output: {
-    // Thêm mã hash tên file dựa vào content để tránh bị cache bởi CDN hay browser.
-    filename: 'static/js/main.[contenthash:6].js',
-    // Build ra thư mục build
-    path: path.resolve(__dirname, '../build'),
-    publicPath: '/',
-    clean: true
+    publicPath: 'auto'
   },
   module: {
     rules: [
@@ -45,17 +39,20 @@ module.exports = {
         }
       },
       {
-        // duyệt các file sass || scss || css
-        test: /\.(s[ac]ss|css)$/,
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+      },
+      {
+        test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader,
           {
-            // dùng import 'filename.css' trong file tsx, ts
-            loader: 'css-loader'
+            loader: 'style-loader' // creates style nodes from JS strings
           },
           {
-            // biên dịch sass sang css
-            loader: 'sass-loader'
+            loader: 'css-loader' // translates CSS into CommonJS
+          },
+          {
+            loader: 'sass-loader' // compiles Sass to CSS
           },
           {
             loader: 'postcss-loader'
@@ -90,10 +87,6 @@ module.exports = {
   },
 
   plugins: [
-    // Đưa css ra thành một file .css riêng biệt thay vì bỏ vào file .js
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    }),
     // Removes/cleans build folders and unused assets when rebuilding
     new CleanWebpackPlugin(),
     // Copies files from target to destination folder
