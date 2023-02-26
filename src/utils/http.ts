@@ -3,7 +3,7 @@ import HttpStatusCode from 'src/constants/httpStatusCode.enum'
 import { toast } from 'react-toastify'
 import { AuthResponse } from '@Types/auth.type'
 import { clearLS, getAccessTokenFromLS, setAccessTokenToLS, setProfile } from './auth'
-import { URL_LOGIN, URL_LOGOUT } from '@Apis/auth.api'
+import { URL_LOGIN, URL_LOGOUT, URL_REGISTER } from '@Apis/auth.api'
 
 class Http {
   instance: AxiosInstance
