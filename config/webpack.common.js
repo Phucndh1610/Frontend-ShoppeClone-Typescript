@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin').TsconfigPathsPlugin
 const ESLintPlugin = require('eslint-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   // file đầu vào cho webpack, file này import bao gồm các file khác
@@ -87,6 +88,8 @@ module.exports = {
   },
 
   plugins: [
+    // use variable env
+    new Dotenv(),
     // Removes/cleans build folders and unused assets when rebuilding
     new CleanWebpackPlugin(),
     // Copies files from target to destination folder
