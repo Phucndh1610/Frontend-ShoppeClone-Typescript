@@ -41,7 +41,8 @@ module.exports = {
           ['@Assets', './src/assets'],
           ['@Types', './src/types'],
           ['@Apis', './src/apis'],
-          ['@Contexts', './src/contexts']
+          ['@Contexts', './src/contexts'],
+          ['@Hooks', './src/hooks']
         ]
       }
     }
