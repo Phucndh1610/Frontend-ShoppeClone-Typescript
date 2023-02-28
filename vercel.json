@@ -1,7 +1,6 @@
 {
   "rewrites": [{ "source": "/(.*)", "destination": "/" }],
   "env": {
-    "REACT_APP_API_URL": "https://api-ecom.duthanhduoc.com/",
-    "SECRET": "@shoppe-clone"
+    "REACT_APP_API_URL": "https://api-ecom.duthanhduoc.com/"
   }
 }
