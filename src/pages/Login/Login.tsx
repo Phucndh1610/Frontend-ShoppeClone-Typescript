@@ -1,46 +1,98 @@
+import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useMutation } from '@tanstack/react-query'
+import { AppContext } from '@Contexts/app.contexts'
+import { isAxiosUnprocessableEntityError } from '@Utils/utils'
+import { Schema, schema } from '@Utils/rules'
+import { ErrorResponse } from '@Types/utils.type'
+// @Api
+import authApi from '@Apis/auth.api'
+// @Component
+import Button from '@Components/Button/index'
+import Input from '@Components/Input'
+import bg_register from '@Assets/images/bg_register.png'
+
+type FormData = Omit<Schema, 'confirm_password'>
+const schemaLogin = schema.pick(['email', 'password'])
 
 export default function Login() {
+  const { setIsAuthenticated, setProfile } = useContext(AppContext)
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
-    formState: { errors }
-  } = useForm()
-  const onSubmit = handleSubmit((data) => {
-    console.log(data)
+    formState: { errors },
+    setError
+  } = useForm<FormData>({ resolver: yupResolver(schemaLogin) })
+
+  const LoginMutation = useMutation({
+    mutationFn: (body: FormData) => authApi.login(body)
   })
+
+  const onSubmit = handleSubmit((data) => {
+    LoginMutation.mutate(data, {
+      onSuccess: (data) => {
+        setIsAuthenticated(true)
+        setProfile(data.data.data.user)
+        navigate('/')
+      },
+      onError: (error) => {
+        if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
+          const formError = error.response?.data.data
+          if (formError) {
+            Object.keys(formError).map((key) => {
+              setError(key as keyof FormData, {
+                message: formError[key as keyof FormData],
+                type: 'Server'
+              })
+            })
+          }
+        }
+      }
+    })
+  })
+
   return (
     <div className='bg-orange'>
       <div className='container'>
         <div className='grid grid-cols-1 py-12 lg:grid-cols-5 lg:py-32 lg:pr-10'>
+          <div className='sml:hidden lg:col-span-3 lg:col-start-1 lg:inline'>
+            <img src={bg_register} alt='...' />
+          </div>
           <div className='lg:col-span-2 lg:col-start-4'>
-            <form className='rounded bg-white p-10 shadow-sm' onSubmit={onSubmit}>
+            <form className='rounded bg-white p-10 shadow-sm' onSubmit={onSubmit} noValidate>
               <div className='text-2xl'>Đăng Nhập</div>
               <div className='mt-8'>
-                <input
+                <Input
                   name='email'
+                  register={register}
                   type='email'
-                  className='w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm'
                   placeholder='Email'
+                  className='mt-8'
+                  autoComplete='none'
+                  errorMessage={errors.email?.message}
                 />
-                <div className='mt-1 min-h-[1rem] text-sm text-red-600'>errors</div>
-                <input
+                <Input
                   name='password'
+                  register={register}
                   type='password'
-                  autoComplete='on'
-                  className='w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm'
                   placeholder='Password'
+                  className='mt-3'
+                  autoComplete='none'
+                  errorMessage={errors.password?.message}
                 />
-                <div className='mt-1 min-h-[1rem] text-sm text-red-600'>errors</div>
               </div>
               <div className='mt-3'>
-                <button
+                <Button
                   type='submit'
-                  className='flex  w-full items-center justify-center bg-red-500 py-4 px-2 text-sm uppercase text-white hover:bg-red-600'
+                  className=' flex w-full items-center justify-center bg-red-500 py-4 px-2 text-sm uppercase text-white hover:bg-red-600'
+                  isLoading={LoginMutation.isLoading}
+                  disabled={LoginMutation.isLoading}
                 >
                   Đăng nhập
-                </button>
+                </Button>
               </div>
               <div className='mt-8 flex items-center justify-center'>
                 <span className='text-gray-400'>Bạn chưa có tài khoản?</span>

@@ -40,7 +40,9 @@ module.exports = {
           ['@Layouts', './src/layouts'],
           ['@Assets', './src/assets'],
           ['@Types', './src/types'],
-          ['@Apis', './src/apis']
+          ['@Apis', './src/apis'],
+          ['@Contexts', './src/contexts'],
+          ['@Hooks', './src/hooks']
         ]
       }
     }
