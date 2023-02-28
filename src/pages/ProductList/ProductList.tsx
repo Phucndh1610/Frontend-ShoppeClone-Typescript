@@ -14,7 +14,7 @@ export type QueryConfig = {
 
 export default function ProductList() {
   const queryConfig = useQueryConfig()
-  const { data } = useQuery({
+  const { data: productData } = useQuery({
     queryKey: ['products', queryConfig],
     queryFn: () => {
       return ProductApi.getProducts(queryConfig as ProductListConfig)
@@ -25,7 +25,7 @@ export default function ProductList() {
   return (
     <div className='bg-gray-200 py-6'>
       <div className='container'>
-        {data && (
+        {productData && (
           <div className='grid grid-cols-12 gap-6'>
             <div className='col-span-3'>
               <AsideFilter />
@@ -33,13 +33,13 @@ export default function ProductList() {
             <div className='col-span-9'>
               <SortProductList />
               <div className='xl:grid-col-5 mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4'>
-                {data?.data.data.products.map((product) => (
+                {productData.data.data.products.map((product) => (
                   <div className='col-span-1' key={product._id}>
                     <Product product={product} />
                   </div>
                 ))}
               </div>
-              <Pagination queryConfig={queryConfig} pageSize={data.data.data.pagination.page_size} />
+              <Pagination queryConfig={queryConfig} pageSize={productData.data.data.pagination.page_size} />
             </div>
           </div>
         )}
