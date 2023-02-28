@@ -27,7 +27,7 @@
       "@Types/*": ["src/types/*"],
       "@Apis/*": ["src/apis/*"],
       "@Contexts/*": ["src/contexts/*"],
-      "@Hooks/*": ["/src/hooks"]
+      "@Hooks/*": ["src/hooks"]
     }
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx", "./src/**/*.d.ts"],
