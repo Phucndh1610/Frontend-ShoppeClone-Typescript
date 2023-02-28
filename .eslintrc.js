@@ -42,7 +42,8 @@ module.exports = {
           ['@Types', './src/types'],
           ['@Apis', './src/apis'],
           ['@Contexts', './src/contexts'],
-          ['@Hooks', './src/hooks']
+          ['@Hooks', './src/hooks'],
+          ['@Constants, ./src/constants']
         ]
       }
     }
