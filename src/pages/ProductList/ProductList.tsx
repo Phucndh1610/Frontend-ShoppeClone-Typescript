@@ -31,7 +31,7 @@ export default function ProductList() {
               <AsideFilter />
             </div>
             <div className='col-span-9'>
-              <SortProductList />
+              <SortProductList queryConfig={queryConfig} pageSize={productData.data.data.pagination.page_size} />
               <div className='xl:grid-col-5 mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4'>
                 {productData.data.data.products.map((product) => (
                   <div className='col-span-1' key={product._id}>
