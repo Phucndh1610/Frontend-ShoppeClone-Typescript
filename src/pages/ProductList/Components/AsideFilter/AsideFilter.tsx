@@ -10,11 +10,8 @@ import { QueryConfig } from 'src/hooks/useQueryConfig'
 import { Schema, schema } from '@Utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { NoUndefinedFiend } from '@Types/utils.type'
-<<<<<<< HEAD
-=======
 import RatingStart from '../RatingStars'
 import { omit } from 'lodash'
->>>>>>> development
 
 interface Props {
   queryConfig: QueryConfig
@@ -55,8 +52,6 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
       }).toString()
     })
   })
-<<<<<<< HEAD
-=======
 
   const handleRemoveAll = () => {
     navigate({
@@ -64,7 +59,6 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
       search: createSearchParams(omit(queryConfig, ['price_min', 'price_max', 'rating_filter', 'category'])).toString()
     })
   }
->>>>>>> development
 
   return (
     <div className='py-4'>
