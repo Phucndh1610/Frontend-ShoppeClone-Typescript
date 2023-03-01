@@ -14,7 +14,7 @@ import Button from '@Components/Button/index'
 import Input from '@Components/Input'
 import bg_register from '@Assets/images/bg_register.png'
 
-type FormData = Omit<Schema, 'confirm_password'>
+type FormData = Pick<Schema, 'email' | 'password'>
 const schemaLogin = schema.pick(['email', 'password'])
 
 export default function Login() {
