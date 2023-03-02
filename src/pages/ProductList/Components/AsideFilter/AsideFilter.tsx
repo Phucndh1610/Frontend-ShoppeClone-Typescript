@@ -140,9 +140,9 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
                   <InputNumber
                     type='text'
                     className='grow'
-                    placeholder='đ TỪ'
+                    placeholder='₫ TỪ'
                     classNameError='hidden'
-                    classNameInput='p-1 w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm'
+                    classNameInput='w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm'
                     {...field}
                     onChange={(event) => {
                       field.onChange(event)
@@ -161,9 +161,9 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
                   <InputNumber
                     type='text'
                     className='grow'
-                    placeholder='đ ĐẾN'
+                    placeholder='₫ ĐẾN'
                     classNameError='hidden'
-                    classNameInput='p-1 w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm'
+                    classNameInput='w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm'
                     {...field}
                     onChange={(event) => {
                       field.onChange(event)
