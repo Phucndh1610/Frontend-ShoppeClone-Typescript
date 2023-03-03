@@ -9,15 +9,17 @@ import { useContext } from 'react'
 import { AppContext } from '@Contexts/app.contexts'
 import path from 'src/constants/path'
 import ProductDetail from '@Pages/ProductDetail/index'
+import Cart from '@Pages/Cart/index'
+import CartLayout from '@Layouts/CartLayout/index'
 
 function ProtectedRoute() {
-  const isAuthenticated = useContext(AppContext)
+  const { isAuthenticated } = useContext(AppContext)
   return isAuthenticated ? <Outlet /> : <Navigate to={path.login} />
 }
 
 function RejectedRoute() {
-  const isAuthenticated = useContext(AppContext)
-  return isAuthenticated ? <Outlet /> : <Navigate to={path.home} />
+  const { isAuthenticated } = useContext(AppContext)
+  return !isAuthenticated ? <Outlet /> : <Navigate to={path.home} />
 }
 
 export default function useRouterElements() {
@@ -33,7 +35,6 @@ export default function useRouterElements() {
     },
     {
       path: path.productDetail,
-      index: true,
       element: (
         <MainLayout>
           <ProductDetail />
@@ -50,6 +51,14 @@ export default function useRouterElements() {
             <MainLayout>
               <Profile />
             </MainLayout>
+          )
+        },
+        {
+          path: path.cart,
+          element: (
+            <CartLayout>
+              <Cart />
+            </CartLayout>
           )
         }
       ]

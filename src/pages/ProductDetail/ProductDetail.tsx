@@ -11,7 +11,7 @@ import ProductRating from '@Components/ProductRating/index'
 import QuantityController from '@Components/QuantityController/index'
 import Product from '@Pages/ProductList/Components/Product/index'
 import purchaseApi from '@Apis/purchase.api'
-import { queryClient } from 'src'
+import { queryClient } from 'src/index'
 import { purchasesStatus } from 'src/constants/purchaseStatus'
 import { toast } from 'react-toastify'
 
