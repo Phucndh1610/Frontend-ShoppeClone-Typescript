@@ -1,26 +1,24 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-named-as-default */
-import purchaseApi from '@Apis/purchase.api'
-import Button from '@Components/Button/index'
-import QuantityController from '@Components/QuantityController'
+import React, { useContext, useEffect, useMemo } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { Purchase } from '@Types/purchase.type'
-import { generateNameId, formatCurrency } from '@Utils/utils'
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import path from 'src/constants/path'
-import { purchasesStatus } from 'src/constants/purchaseStatus'
-import produce from 'immer'
 import { keyBy } from 'lodash'
 import { toast } from 'react-toastify'
+import produce from 'immer'
+import path from 'src/constants/path'
+import { generateNameId, formatCurrency } from '@Utils/utils'
+import { Purchase } from '@Types/purchase.type'
+import { AppContext } from '@Contexts/app.contexts'
+import { purchasesStatus } from 'src/constants/purchaseStatus'
+import purchaseApi from '@Apis/purchase.api'
 import noProduct from '@Assets/images/bg-cart.png'
 
-interface ExtendedPurchases extends Purchase {
-  disable: boolean
-  checked: boolean
-}
+import Button from '@Components/Button/index'
+import QuantityController from '@Components/QuantityController'
 
 export default function Cart() {
-  const [extendedPurchases, setExtendedPurchases] = useState<ExtendedPurchases[]>([])
+  const { extendedPurchases, setExtendedPurchases } = useContext(AppContext)
   const { data: purchasesInCartData, refetch } = useQuery({
     queryKey: ['purchases', { status: purchasesStatus.inCart }],
     queryFn: () => purchaseApi.getPurchases({ status: purchasesStatus.inCart })
@@ -47,16 +45,26 @@ export default function Cart() {
       refetch()
     }
   })
+  const location = useLocation()
+  const chosenPurchaseIdLocation = (location.state as { purchaseId: string | null })?.purchaseId
   const purchasesInCart = purchasesInCartData?.data.data
-  const isAllChecked = extendedPurchases.every((purchase) => purchase.checked)
-  const checkedPurchases = extendedPurchases.filter((purchase) => purchase.checked)
+  const isAllChecked = useMemo(() => extendedPurchases.every((purchase) => purchase.checked), [extendedPurchases])
+  const checkedPurchases = useMemo(() => extendedPurchases.filter((purchase) => purchase.checked), [extendedPurchases])
   const checkedPurchasesCount = checkedPurchases.length
-  const totalCheckedPurchasePrice = checkedPurchases.reduce((result, current) => {
-    return result + current.product.price * current.buy_count
-  }, 0)
-  const totalCheckedPurchaseSavingPrice = checkedPurchases.reduce((result, current) => {
-    return result + (current.product.price_before_discount - current.product.price) * current.buy_count
-  }, 0)
+  const totalCheckedPurchasePrice = useMemo(
+    () =>
+      checkedPurchases.reduce((result, current) => {
+        return result + current.product.price * current.buy_count
+      }, 0),
+    [checkedPurchases]
+  )
+  const totalCheckedPurchaseSavingPrice = useMemo(
+    () =>
+      checkedPurchases.reduce((result, current) => {
+        return result + (current.product.price_before_discount - current.product.price) * current.buy_count
+      }, 0),
+    [checkedPurchases]
+  )
   const handleCheck = (purchaseIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setExtendedPurchases(
       produce((draft) => {
@@ -118,14 +126,23 @@ export default function Cart() {
     setExtendedPurchases((pre) => {
       const extendedPurchasesObject = keyBy(pre, '_id')
       return (
-        purchasesInCart?.map((purchase) => ({
-          ...purchase,
-          disable: false,
-          checked: Boolean(extendedPurchasesObject[purchase._id]?.checked)
-        })) || []
+        purchasesInCart?.map((purchase) => {
+          const isChosenPurchaseIdLocation = chosenPurchaseIdLocation === purchase._id
+          return {
+            ...purchase,
+            disable: false,
+            checked: isChosenPurchaseIdLocation || Boolean(extendedPurchasesObject[purchase._id]?.checked)
+          }
+        }) || []
       )
     })
-  }, [purchasesInCart])
+  }, [purchasesInCart, chosenPurchaseIdLocation])
+
+  useEffect(() => {
+    return () => {
+      history.replaceState(null, '')
+    }
+  }, [])
 
   return (
     <div className='bg-neutral-100 py-16'>
