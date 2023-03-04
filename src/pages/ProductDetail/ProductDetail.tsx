@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import DOMPurify from 'dompurify'
 
 import { formatCurrency, formatNumberToSocialStyle, getIdFromNameId, rateSale } from '@Utils/utils'
@@ -11,12 +11,16 @@ import ProductRating from '@Components/ProductRating/index'
 import QuantityController from '@Components/QuantityController/index'
 import Product from '@Pages/ProductList/Components/Product/index'
 import purchaseApi from '@Apis/purchase.api'
-import { queryClient } from 'src/index'
 import { purchasesStatus } from 'src/constants/purchaseStatus'
 import { toast } from 'react-toastify'
+import path from 'src/constants/path'
+import { AppContext } from '@Contexts/app.contexts'
 
 export default function ProductDetail() {
   const { nameId } = useParams()
+  const navigate = useNavigate()
+  const queryClient = useQueryClient()
+  const { isAuthenticated } = useContext(AppContext)
   const id = getIdFromNameId(nameId as string)
   const { data: productDetailData } = useQuery({
     queryKey: ['product', id],
@@ -103,10 +107,27 @@ export default function ProductDetail() {
         onSuccess: (data) => {
           toast.success(data.data.message)
           queryClient.invalidateQueries({ queryKey: ['purchases', { status: purchasesStatus.inCart }] })
+        },
+        onError: () => {
+          if (!isAuthenticated) navigate(path.login)
         }
       }
     )
   }
+
+  const buyNow = async () => {
+    const res = await addToCartMutation.mutateAsync({
+      buy_count: buyCount,
+      product_id: product?._id as string
+    })
+    const purchase = res.data.data
+    navigate(path.cart, {
+      state: {
+        purchaseId: purchase._id
+      }
+    })
+  }
+
   if (!product) return null
   return (
     <div className='bg-gray-200 py-6'>
@@ -237,7 +258,10 @@ export default function ProductDetail() {
                   </svg>
                   Thêm vào giỏ hàng
                 </button>
-                <button className='ml-4 flex h-12 min-w-[5rem] items-center justify-center rounded-sm bg-orange px-5 capitalize text-white shadow-sm outline-none hover:bg-orange/90'>
+                <button
+                  className='ml-4 flex h-12 min-w-[5rem] items-center justify-center rounded-sm bg-orange px-5 capitalize text-white shadow-sm outline-none hover:bg-orange/90'
+                  onClick={buyNow}
+                >
                   Mua ngay
                 </button>
               </div>
