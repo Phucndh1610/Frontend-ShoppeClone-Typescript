@@ -20,7 +20,7 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin()]
   },
   output: {
-    publicPath: 'auto'
+    publicPath: '/'
   },
   module: {
     rules: [

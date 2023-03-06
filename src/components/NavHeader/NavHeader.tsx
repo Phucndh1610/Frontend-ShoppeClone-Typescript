@@ -6,6 +6,7 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import path from 'src/constants/path'
 import { purchasesStatus } from 'src/constants/purchaseStatus'
+import { getAvatarUrl } from '@Utils/utils'
 
 export default function NavHeader() {
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
@@ -87,7 +88,7 @@ export default function NavHeader() {
           }
         >
           <div className='mr-2 h-6 w-6 flex-shrink-0'>
-            <img src='https://bit.ly/dan-abramov' alt='avata' className='h-full w-full rounded-full object-cover' />
+            <img src={getAvatarUrl(profile?.avatar)} alt='avatar' className='h-full w-full rounded-full object-cover' />
           </div>
           <div>{profile?.name ? profile?.name : profile?.email}</div>
         </Popover>
