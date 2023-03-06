@@ -1,16 +1,21 @@
+import { Suspense, useContext } from 'react'
+import { AppContext } from '@Contexts/app.contexts'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
-import ProductList from '@Pages/ProductList/index'
+import path from 'src/constants/path'
+// Layouts
+import MainLayout from '@Layouts/MainLayout/index'
+import RegisterLayout from '@Layouts/RegisterLayout/index'
+import CartLayout from '@Layouts/CartLayout/index'
+// components
 import Login from '@Pages/Login/index'
 import Register from '@Pages/Register/index'
-import RegisterLayout from '@Layouts/RegisterLayout/index'
-import MainLayout from '@Layouts/MainLayout/index'
-import Profile from '@Pages/Profile/index'
-import { useContext } from 'react'
-import { AppContext } from '@Contexts/app.contexts'
-import path from 'src/constants/path'
+import ProductList from '@Pages/ProductList/index'
 import ProductDetail from '@Pages/ProductDetail/index'
 import Cart from '@Pages/Cart/index'
-import CartLayout from '@Layouts/CartLayout/index'
+import UserLayout from '@Pages/User/layouts/UserLayout/index'
+import Profile from '@Pages/User/pages/Profile/index'
+import ChangePassword from '@Pages/User/pages/ChangePassword/index'
+import HistoryPurchase from '@Pages/User/pages/HistoryPurchase/index'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -46,12 +51,38 @@ export default function useRouterElements() {
       element: <ProtectedRoute />,
       children: [
         {
-          path: path.profile,
+          path: path.user,
           element: (
             <MainLayout>
-              <Profile />
+              <UserLayout />
             </MainLayout>
-          )
+          ),
+          children: [
+            {
+              path: path.profile,
+              element: (
+                <Suspense>
+                  <Profile />
+                </Suspense>
+              )
+            },
+            {
+              path: path.changePassword,
+              element: (
+                <Suspense>
+                  <ChangePassword />
+                </Suspense>
+              )
+            },
+            {
+              path: path.historyPurchase,
+              element: (
+                <Suspense>
+                  <HistoryPurchase />
+                </Suspense>
+              )
+            }
+          ]
         },
         {
           path: path.cart,
