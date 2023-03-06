@@ -79,7 +79,7 @@ export default function Login() {
                   register={register}
                   type='password'
                   placeholder='Password'
-                  className='mt-3'
+                  className='relative mt-3'
                   autoComplete='none'
                   errorMessage={errors.password?.message}
                 />
