@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import './App.css'
 import { AppProvider } from '@Contexts/app.contexts'
+import ErrorBoundary from '@Components/ErrorBoundary/index'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,7 +22,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <AppProvider>
-          <App />
+          <ErrorBoundary>
+            <App />
+          </ErrorBoundary>
         </AppProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

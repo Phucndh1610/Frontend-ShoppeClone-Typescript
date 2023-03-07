@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { range } from 'lodash'
+import range from 'lodash/range'
 
 interface Props {
   onChange?: (value: Date) => void
