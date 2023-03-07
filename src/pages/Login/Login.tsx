@@ -81,6 +81,7 @@ export default function Login() {
                   placeholder='Password'
                   className='relative mt-3'
                   autoComplete='none'
+                  classNameEya='absolute right-[8px] top-[13px] h-5 w-5 cursor-pointer'
                   errorMessage={errors.password?.message}
                 />
               </div>
