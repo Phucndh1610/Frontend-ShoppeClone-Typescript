@@ -11,7 +11,7 @@ import { Schema, schema } from '@Utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { NoUndefinedFiend } from '@Types/utils.type'
 import RatingStart from '../RatingStars'
-import { omit } from 'lodash'
+import omit from 'lodash/omit'
 
 interface Props {
   queryConfig: QueryConfig

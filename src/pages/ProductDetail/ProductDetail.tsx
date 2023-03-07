@@ -17,7 +17,7 @@ import path from 'src/constants/path'
 import { AppContext } from '@Contexts/app.contexts'
 
 export default function ProductDetail() {
-  const { nameId } = useParams()
+  const { nameId, productId } = useParams()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const { isAuthenticated } = useContext(AppContext)

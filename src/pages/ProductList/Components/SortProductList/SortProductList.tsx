@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { ProductListConfig } from '@Types/product.type'
 import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import path from 'src/constants/path'
-import { omit } from 'lodash'
+import omit from 'lodash/omit'
 interface Props {
   queryConfig: QueryConfig
   pageSize: number
@@ -48,7 +48,7 @@ export default function SortProductList({ queryConfig, pageSize }: Props) {
         <div className='flex flex-wrap items-center gap-2'>
           <div>Sắp xếp theo</div>
           <button
-            className={classNames('h-8 px-4 text-center capitalize text-white hover:bg-orange/80', {
+            className={classNames('h-8 px-4 text-center capitalize', {
               'bg-orange text-white hover:bg-orange/80': isActiveSortBy(sortBy.view),
               'bg-white text-black hover:bg-slate-100': !isActiveSortBy(sortBy.view)
             })}
@@ -57,7 +57,7 @@ export default function SortProductList({ queryConfig, pageSize }: Props) {
             Phổ biến
           </button>
           <button
-            className={classNames('h-8 px-4 text-center capitalize text-white hover:bg-orange/80', {
+            className={classNames('h-8 px-4 text-center capitalize', {
               'bg-orange text-white hover:bg-orange/80': isActiveSortBy(sortBy.createdAt),
               'bg-white text-black hover:bg-slate-100': !isActiveSortBy(sortBy.createdAt)
             })}
@@ -66,7 +66,7 @@ export default function SortProductList({ queryConfig, pageSize }: Props) {
             Mới nhất
           </button>
           <button
-            className={classNames('h-8 px-4 text-center capitalize text-white hover:bg-orange/80', {
+            className={classNames('h-8 px-4 text-center capitalize', {
               'bg-orange text-white hover:bg-orange/80': isActiveSortBy(sortBy.sold),
               'bg-white text-black hover:bg-slate-100': !isActiveSortBy(sortBy.sold)
             })}
