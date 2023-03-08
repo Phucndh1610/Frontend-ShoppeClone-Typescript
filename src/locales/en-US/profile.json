@@ -1,0 +1,30 @@
+{
+  "profile": {
+    "txt_my_account": "My Account",
+    "txt_change_password": "Change password",
+    "txt_purchase": "My Purchase",
+    "txt_my_profile": "My Profile",
+    "txt_manage_protect": "Manage and protect your account",
+    "txt_email": "Email",
+    "txt_name": "Name",
+    "txt_phone": "Phone Number",
+    "txt_address": "Address",
+    "txt_date_of_birth": "Date of birth",
+    "txt_size": "File size: maximum 1 MB",
+    "txt_extension": "File extension: .JPEG, .PNG",
+    "txt_old_pass": "Old password",
+    "txt_new_password": "New Password",
+    "txt_confirm_password": "Confirm Password",
+    "btn_select_image": "Select Image",
+    "btn_edit_profile": "Edit Profile",
+    "btn_save": "Save",
+
+    "txt_all": "All",
+    "txt_waitForConfirmation": "WaitForConfirmation",
+    "txt_waitForGetting": "WaitForGetting",
+    "txt_inProgress": "InProgress",
+    "txt_delivered": "Delivered",
+    "txt_cancelled": "Cancelled",
+    "txt_price": "Total"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "cart": {
+    "txt_shopping_cart": "Giỏ Hàng",
+    "txt_product": "Sản phẩm",
+    "txt_unit_price": "Đơn Giá",
+    "txt_quantity": "Số lượng",
+    "txt_total_price": "Số tiền",
+    "txt_action": "Thao tác",
+    "txt_total": "Tổng thanh toán",
+    "txt_save": "Tiết kiệm",
+    "txt_your_shopping_cart": "Giỏ hàng của bạn đang trống",
+    "txt_recently_added_products": "Sản phẩm mới thêm",
+    "txt_add_to_cart": "Thêm vào giỏ hàng",
+    "txt_no_products_yet": "Chưa có sản phẩm",
+    "btn_delete": "Xóa",
+    "btn_chose_all": "Chọn tất cả",
+    "btn_buy": "Mua hàng",
+    "btn_shopping_now": "Mua ngay",
+    "btn_view_shopping_cart": "Xem giỏ hàng"
+  }
+}

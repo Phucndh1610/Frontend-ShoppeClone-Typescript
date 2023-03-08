@@ -1,0 +1,28 @@
+{
+  "home": {
+    "txt_vietnamese": "Tiếng Việt",
+    "txt_english": "Tiếng Anh",
+    "txt_register": "Đăng Kí",
+    "txt_login": "Đăng Nhập",
+    "txt_up": "Trở lên",
+    "txt_sold": "Đã bán",
+    "txt_my_account": "Tài khoản của tôi",
+    "txt_my_purchase": "Đơn mua",
+    "txt_logout": "Đăng xuất",
+    "lbl_all_category": "Tất cả danh mục",
+    "lbl_filter": "Bộ lộc tìm kiếm",
+    "lbl_price_range": "Khoảng Giá",
+    "lbl_min": "Từ",
+    "lbl_max": "Đến",
+    "lbl_rating": "Đánh giá",
+    "btn_apply": "Áp dụng",
+    "btn_delete_all": "Xóa tất cả",
+    "lbl_sort_by": "Tìm kiếm theo",
+    "lbl_popular": "Phổ biến",
+    "lbl_latest": "Mới nhất",
+    "lbl_top_seller": "Bán chạy",
+    "lbl_price": "Giá",
+    "lbl_price_low": "Giá: thấp đến cao",
+    "lbl_price_hight": "Giá: cao đến thấp"
+  }
+}

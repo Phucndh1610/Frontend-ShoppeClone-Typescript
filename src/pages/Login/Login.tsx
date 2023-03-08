@@ -13,11 +13,13 @@ import authApi from '@Apis/auth.api'
 import Button from '@Components/Button/index'
 import Input from '@Components/Input'
 import bg_register from '@Assets/images/bg_register.png'
+import { useTranslation } from 'react-i18next'
 
 type FormData = Pick<Schema, 'email' | 'password'>
 const schemaLogin = schema.pick(['email', 'password'])
 
 export default function Login() {
+  const { t } = useTranslation()
   const { setIsAuthenticated, setProfile } = useContext(AppContext)
   const navigate = useNavigate()
   const {
@@ -63,13 +65,13 @@ export default function Login() {
           </div>
           <div className='lg:col-span-2 lg:col-start-4'>
             <form className='rounded bg-white p-10 shadow-sm' onSubmit={onSubmit} noValidate>
-              <div className='text-2xl'>Đăng Nhập</div>
+              <div className='text-2xl'>{t('auth.txt_login')}</div>
               <div className='mt-8'>
                 <Input
                   name='email'
                   register={register}
                   type='email'
-                  placeholder='Email'
+                  placeholder={`${t('auth.lbl_email')}`}
                   className='mt-8'
                   autoComplete='none'
                   errorMessage={errors.email?.message}
@@ -78,7 +80,7 @@ export default function Login() {
                   name='password'
                   register={register}
                   type='password'
-                  placeholder='Password'
+                  placeholder={`${t('auth.lbl_password')}`}
                   className='relative mt-3'
                   autoComplete='none'
                   classNameEya='absolute right-[8px] top-[13px] h-5 w-5 cursor-pointer'
@@ -92,13 +94,13 @@ export default function Login() {
                   isLoading={LoginMutation.isLoading}
                   disabled={LoginMutation.isLoading}
                 >
-                  Đăng nhập
+                  {t('auth.btn_login')}
                 </Button>
               </div>
               <div className='mt-8 flex items-center justify-center'>
-                <span className='text-gray-400'>Bạn chưa có tài khoản?</span>
+                <span className='text-gray-400'>{t('auth.txt_do_not_have_an_account')}</span>
                 <Link className='ml-1 text-red-400' to='/register'>
-                  Đăng ký
+                  {t('auth.txt_register')}
                 </Link>
               </div>
             </form>
