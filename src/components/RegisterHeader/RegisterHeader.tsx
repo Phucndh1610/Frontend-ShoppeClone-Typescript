@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next'
 import { Link, useMatch } from 'react-router-dom'
 import path from 'src/constants/path'
 
 export default function RegisterHeader() {
+  const { t } = useTranslation()
   const registerMatch = useMatch(path.register)
   const isRegister = Boolean(registerMatch)
   return (
@@ -15,7 +17,7 @@ export default function RegisterHeader() {
               </g>
             </svg>
           </Link>
-          <div className='ml-5 text-xl lg:text-2xl'>{isRegister ? 'Đăng ký' : 'Đăng nhập'}</div>
+          <div className='ml-5 text-xl lg:text-2xl'>{isRegister ? t('auth.txt_register') : t('auth.txt_login')}</div>
         </nav>
       </div>
     </header>

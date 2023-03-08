@@ -1,0 +1,28 @@
+{
+  "home": {
+    "txt_vietnamese": "Vietnamese",
+    "txt_english": "English",
+    "txt_register": "Register",
+    "txt_login": "Login",
+    "txt_up": "Up",
+    "txt_sold": "Sold",
+    "txt_my_account": "My account",
+    "txt_my_purchase": "My purchase",
+    "txt_logout": "Logout",
+    "lbl_all_category": "All Category",
+    "lbl_filter": "Filter search",
+    "lbl_price_range": "Price Range",
+    "lbl_min": "Min",
+    "lbl_max": "Max",
+    "lbl_rating": "Rating",
+    "btn_apply": "Apply",
+    "btn_delete_all": "Clear All",
+    "lbl_sort_by": "Sort by",
+    "lbl_popular": "Popular",
+    "lbl_latest": "Latest",
+    "lbl_top_seller": "Top seller",
+    "lbl_price": "Price",
+    "lbl_price_low": "Price: low to hight",
+    "lbl_price_hight": "Price: hight to low"
+  }
+}
