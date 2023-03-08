@@ -8,17 +8,18 @@ import { PurchaseListStatus } from '@Types/purchase.type'
 import { purchasesStatus } from 'src/constants/purchaseStatus'
 import useQueryParams from 'src/hooks/useQueryParams'
 import { formatCurrency, generateNameId } from '@Utils/utils'
-
-const purchaseTabs = [
-  { status: purchasesStatus.all, name: 'Tất cả' },
-  { status: purchasesStatus.waitForConfirmation, name: 'Chờ xác nhận' },
-  { status: purchasesStatus.waitForGetting, name: 'Chờ lấy hàng' },
-  { status: purchasesStatus.inProgress, name: 'Đang giao' },
-  { status: purchasesStatus.delivered, name: 'Đã giao' },
-  { status: purchasesStatus.cancelled, name: 'Đã hũy' }
-]
+import { useTranslation } from 'react-i18next'
 
 export default function HistoryPurchase() {
+  const { t } = useTranslation()
+  const purchaseTabs = [
+    { status: purchasesStatus.all, name: t('profile.txt_all') },
+    { status: purchasesStatus.waitForConfirmation, name: t('profile.txt_waitForConfirmation') },
+    { status: purchasesStatus.waitForGetting, name: t('profile.txt_waitForGetting') },
+    { status: purchasesStatus.inProgress, name: t('profile.txt_inProgress') },
+    { status: purchasesStatus.delivered, name: t('profile.txt_delivered') },
+    { status: purchasesStatus.cancelled, name: t('profile.txt_cancelled') }
+  ]
   const queryParam: { status?: string } = useQueryParams()
   const status: number = Number(queryParam.status) || purchasesStatus.all
 
@@ -74,7 +75,7 @@ export default function HistoryPurchase() {
               </Link>
               <div className='flex justify-end'>
                 <div>
-                  <span>Tổng giá tiền</span>
+                  <span>{t('profile.txt_price')}</span>
                   <span className='ml-4 text-xl text-orange'>
                     ₫{formatCurrency(purchase.product.price * purchase.buy_count)}
                   </span>

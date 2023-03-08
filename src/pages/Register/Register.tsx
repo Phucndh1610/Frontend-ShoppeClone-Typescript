@@ -13,11 +13,13 @@ import { ErrorResponse } from '@Types/utils.type'
 import { AppContext } from '@Contexts/app.contexts'
 import Button from '@Components/Button/index'
 import path from 'src/constants/path'
+import { useTranslation } from 'react-i18next'
 
 type FormData = Pick<Schema, 'email' | 'password' | 'confirm_password'>
 const registerSchema = schema.pick(['email', 'password', 'confirm_password'])
 
 export default function Register() {
+  const { t } = useTranslation()
   const { setIsAuthenticated, setProfile } = useContext(AppContext)
   const navigate = useNavigate()
   const {
@@ -61,12 +63,12 @@ export default function Register() {
           </div>
           <div className='lg:col-span-2 lg:col-start-4'>
             <form className='rounded bg-white p-10 shadow-sm' onSubmit={onSubmit} noValidate>
-              <div className='text-2xl'>Đăng Ký</div>
+              <div className='text-2xl'> {t('auth.txt_register')}</div>
               <Input
                 name='email'
                 register={register}
                 type='email'
-                placeholder='Email'
+                placeholder={`${t('auth.lbl_email')}`}
                 className='mt-8'
                 autoComplete='none'
                 errorMessage={errors.email?.message}
@@ -75,7 +77,7 @@ export default function Register() {
                 name='password'
                 register={register}
                 type='password'
-                placeholder='Password'
+                placeholder={`${t('auth.lbl_password')}`}
                 className='relative mt-3'
                 classNameEya='absolute right-[8px] top-[13px] h-5 w-5 cursor-pointer'
                 autoComplete='none'
@@ -85,7 +87,7 @@ export default function Register() {
                 name='confirm_password'
                 register={register}
                 type='password'
-                placeholder='Confirm Password'
+                placeholder={`${t('auth.txt_confirm_password')}`}
                 className='relative mt-3'
                 classNameEya='absolute right-[8px] top-[13px] h-5 w-5 cursor-pointer'
                 autoComplete='none'
@@ -98,13 +100,13 @@ export default function Register() {
                   isLoading={registerAccountMutation.isLoading}
                   disabled={registerAccountMutation.isLoading}
                 >
-                  Đăng ký
+                  {t('auth.txt_register')}
                 </Button>
               </div>
               <div className='mt-8 flex items-center justify-center'>
                 <span className='text-gray-400'>Bạn đã có tài khoản?</span>
                 <Link className='ml-1 text-red-400' to={path.login}>
-                  Đăng nhập
+                  {t('auth.txt_login')}
                 </Link>
               </div>
             </form>

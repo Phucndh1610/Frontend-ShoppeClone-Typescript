@@ -1,0 +1,30 @@
+{
+  "profile": {
+    "txt_my_account": "Tài khoản của tôi",
+    "txt_change_password": "Đổi mật khẩu",
+    "txt_purchase": "Đơn mua",
+    "txt_my_profile": "Hồ sơ của tôi",
+    "txt_manage_protect": "Quản lý thông tin hồ sơ để bảo mật tài khoản",
+    "txt_email": "Email",
+    "txt_name": "Tên",
+    "txt_phone": "Số điện thoại",
+    "txt_address": "Địa chỉ",
+    "txt_date_of_birth": "Ngày sinh",
+    "txt_size": "Dụng lượng file tối đa 1 MB",
+    "txt_extension": "Định dạng:.JPEG, .PNG",
+    "txt_old_pass": "Mật khẩu cũ",
+    "txt_new_password": "Mật khẩu mới",
+    "txt_confirm_password": "Nhập Lại Mật Khẩu",
+    "btn_select_image": "Chọn ảnh",
+    "btn_edit_profile": "Sửa hồ sơ",
+    "btn_save": "Lưu",
+
+    "txt_all": "Tất cả",
+    "txt_waitForConfirmation": "Chờ xác nhận",
+    "txt_waitForGetting": "Chờ lấy hàng",
+    "txt_inProgress": "Đang Giao",
+    "txt_delivered": "Đã giao",
+    "txt_cancelled": "Đã hũy",
+    "txt_price": "Tổng giá tiền"
+  }
+}
