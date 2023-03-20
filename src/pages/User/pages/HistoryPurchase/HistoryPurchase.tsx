@@ -1,4 +1,3 @@
-import React, { Fragment } from 'react'
 import purchaseApi from '@Apis/purchase.api'
 import { createSearchParams, Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
@@ -9,6 +8,7 @@ import { purchasesStatus } from 'src/constants/purchaseStatus'
 import useQueryParams from 'src/hooks/useQueryParams'
 import { formatCurrency, generateNameId } from '@Utils/utils'
 import { useTranslation } from 'react-i18next'
+import { Helmet } from 'react-helmet-async'
 
 export default function HistoryPurchase() {
   const { t } = useTranslation()
@@ -50,6 +50,10 @@ export default function HistoryPurchase() {
 
   return (
     <div className='overflow-x-auto'>
+      <Helmet>
+        <title>Lịch sử mua hàng | Shoppe clone</title>
+        <meta name='description' content='Shopee Việt Nam | Mua và Bán Trên Ứng Dụng Di Động Hoặc Website' />
+      </Helmet>
       <div className='min-w-[700px]'>
         <div className='sticky top-0 flex rounded-t-sm shadow-sm'>{purchaseTabLink}</div>
         <div>

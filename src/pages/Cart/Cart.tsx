@@ -17,6 +17,7 @@ import noProduct from '@Assets/images/bg-cart.png'
 import Button from '@Components/Button/index'
 import QuantityController from '@Components/QuantityController'
 import { useTranslation } from 'react-i18next'
+import { Helmet } from 'react-helmet-async'
 
 export default function Cart() {
   const { t } = useTranslation()
@@ -149,6 +150,10 @@ export default function Cart() {
   return (
     <div className='bg-neutral-100 py-16'>
       <div className='container'>
+        <Helmet>
+          <title>Giỏ hàng | Shoppe clone</title>
+          <meta name='description' content='Shopee Việt Nam | Mua và Bán Trên Ứng Dụng Di Động Hoặc Website' />
+        </Helmet>
         {extendedPurchases.length > 0 ? (
           <>
             <div className='overflow-auto'>

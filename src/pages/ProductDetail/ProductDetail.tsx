@@ -15,6 +15,7 @@ import { purchasesStatus } from 'src/constants/purchaseStatus'
 import { toast } from 'react-toastify'
 import path from 'src/constants/path'
 import { AppContext } from '@Contexts/app.contexts'
+import { Helmet } from 'react-helmet-async'
 
 export default function ProductDetail() {
   const { nameId, productId } = useParams()
@@ -139,6 +140,10 @@ export default function ProductDetail() {
   return (
     <div className='bg-gray-200 py-6'>
       <div className='container'>
+        <Helmet>
+          <title>{product.name} | Shoppe clone</title>
+          <meta name='description' content={product.name} />
+        </Helmet>
         <div className='bg-white p-4 shadow'>
           <div className='grid grid-cols-12 gap-9'>
             <div className='col-span-5'>

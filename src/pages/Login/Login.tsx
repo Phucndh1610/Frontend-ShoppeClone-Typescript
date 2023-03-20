@@ -7,6 +7,7 @@ import { AppContext } from '@Contexts/app.contexts'
 import { isAxiosUnprocessableEntityError } from '@Utils/utils'
 import { Schema, schema } from '@Utils/rules'
 import { ErrorResponse } from '@Types/utils.type'
+// import { Helmet } from 'react-helmet-async'
 // @Api
 import authApi from '@Apis/auth.api'
 // @Component
@@ -14,6 +15,7 @@ import Button from '@Components/Button/index'
 import Input from '@Components/Input'
 import bg_register from '@Assets/images/bg_register.png'
 import { useTranslation } from 'react-i18next'
+import { Helmet } from 'react-helmet-async'
 
 type FormData = Pick<Schema, 'email' | 'password'>
 const schemaLogin = schema.pick(['email', 'password'])
@@ -58,6 +60,13 @@ export default function Login() {
 
   return (
     <div className='bg-orange'>
+      <Helmet>
+        <title>Đăng nhập | Shoppe Clone</title>
+        <meta
+          name='description'
+          content='Đăng nhập Tài khoản Shopee và tận hưởng ưu đãi độc quyền với giá cả hấp dẫn trên Shopee Việt Nam!'
+        />
+      </Helmet>
       <div className='container'>
         <div className='grid grid-cols-1 py-12 lg:grid-cols-5 lg:py-32 lg:pr-10'>
           <div className='sml:hidden lg:col-span-3 lg:col-start-1 lg:inline'>

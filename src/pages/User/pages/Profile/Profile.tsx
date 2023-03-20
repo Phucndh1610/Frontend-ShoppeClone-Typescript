@@ -19,6 +19,7 @@ import DateSelect from '@Pages/User/components/DateSelect/index'
 // api
 import userApi from '@Apis/user.api'
 import InputFile from '@Components/InputFile'
+import { Helmet } from 'react-helmet-async'
 
 type FormData = Pick<UserSchema, 'name' | 'address' | 'phone' | 'date_of_birth' | 'avatar'>
 
@@ -113,6 +114,10 @@ export default function Profile() {
 
   return (
     <div className='rounded-sm bg-white px-2 pb-10 shadow md:px-7 md:pb-20'>
+      <Helmet>
+        <title>{`${profile?.name ? profile?.name : profile?.email} | Shoppe Clone`} </title>
+        <meta name='description' content='Shopee Việt Nam | Mua và Bán Trên Ứng Dụng Di Động Hoặc Website' />
+      </Helmet>
       <div className='border-b border-b-gray-200 py-6'>
         <h1 className='text-lg font-medium capitalize text-gray-900'>{t('profile.txt_my_profile')}</h1>
         <div className='mt-1 text-sm text-gray-700'>{t('profile.txt_manage_protect')}</div>

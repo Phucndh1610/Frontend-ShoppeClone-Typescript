@@ -3,6 +3,7 @@ import ProductApi from '@Apis/product.api'
 import Pagination from '@Components/Pagination'
 import { useQuery } from '@tanstack/react-query'
 import { ProductListConfig } from '@Types/product.type'
+import { Helmet } from 'react-helmet-async'
 import useQueryConfig from 'src/hooks/useQueryConfig'
 import AsideFilter from './Components/AsideFilter'
 import Product from './Components/Product/Product'
@@ -32,6 +33,13 @@ export default function ProductList() {
 
   return (
     <div className='bg-gray-200 py-6'>
+      <Helmet>
+        <title>Trang chủ | Shoppe Clone</title>
+        <meta
+          name='description'
+          content='Mua sắm trực tuyến hàng triệu sản phẩm ở tất cả ngành hàng. Giá tốt & Ưu đãi. Mua và bán online trong 30 giây. Shopee Đảm Bảo | Freeship Xtra | Hoàn Xu Xtra'
+        />
+      </Helmet>
       <div className='container'>
         {productData && (
           <div className='grid grid-cols-12 gap-6'>
