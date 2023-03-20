@@ -2,7 +2,6 @@ import Button from '@Components/Button/index'
 import InputNumber from '@Components/InputNumber'
 import { Category } from '@Types/category.type'
 import classNames from 'classnames'
-import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import path from 'src/constants/path'
@@ -12,7 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { NoUndefinedFiend } from '@Types/utils.type'
 import RatingStart from '../RatingStars'
 import omit from 'lodash/omit'
-
+import { useTranslation } from 'react-i18next'
 interface Props {
   queryConfig: QueryConfig
   categories: Category[]
@@ -26,12 +25,14 @@ type FomData = NoUndefinedFiend<Pick<Schema, 'price_max' | 'price_min'>>
 const priceSchema = schema.pick(['price_min', 'price_max'])
 
 export default function AsideFilter({ queryConfig, categories }: Props) {
+  const { t } = useTranslation()
   const { category } = queryConfig
   const {
     control,
     handleSubmit,
     trigger,
-    formState: { errors }
+    formState: { errors },
+    reset
   } = useForm<FomData>({
     defaultValues: {
       price_min: '',
@@ -54,6 +55,7 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
   })
 
   const handleRemoveAll = () => {
+    reset()
     navigate({
       pathname: path.home,
       search: createSearchParams(omit(queryConfig, ['price_min', 'price_max', 'rating_filter', 'category'])).toString()
@@ -76,7 +78,7 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
             </g>
           </g>
         </svg>
-        Tất cả danh mục
+        {t('home.lbl_all_category')}
       </Link>
       <div className='my-4 h-[1px] bg-gray-300' />
       <ul>
@@ -125,11 +127,11 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
             />
           </g>
         </svg>
-        Bộ lộc tìm kiếm
+        {t('home.lbl_filter')}
       </Link>
       <div className='my-4 h-[1px] bg-gray-300' />
       <div className='my-5'>
-        <div>Khoảng giá</div>
+        <div> {t('home.lbl_price_range')}</div>
         <form className='mt-2' onSubmit={onSubmit}>
           <div className='flex items-start'>
             <Controller
@@ -140,9 +142,9 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
                   <InputNumber
                     type='text'
                     className='grow'
-                    placeholder='₫ TỪ'
+                    placeholder={`₫ ${t('home.lbl_min')}`}
                     classNameError='hidden'
-                    classNameInput='w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm'
+                    classNameInput='w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm uppercase'
                     {...field}
                     onChange={(event) => {
                       field.onChange(event)
@@ -161,9 +163,9 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
                   <InputNumber
                     type='text'
                     className='grow'
-                    placeholder='₫ ĐẾN'
+                    placeholder={`₫ ${t('home.lbl_max')}`}
                     classNameError='hidden'
-                    classNameInput='w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm'
+                    classNameInput='w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm uppercase'
                     {...field}
                     onChange={(event) => {
                       field.onChange(event)
@@ -179,19 +181,19 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
             className='flex w-full items-center justify-center bg-orange p-2 text-sm text-white hover:bg-orange/80'
             type='submit'
           >
-            Áp dụng
+            {t('home.btn_apply')}
           </Button>
         </form>
       </div>
       <div className='my-4 h-[1px] bg-gray-300' />
-      <div className='text-sm'>Đánh giá</div>
+      <div className='text-sm'>{t('home.lbl_rating')}</div>
       <RatingStart queryConfig={queryConfig} />
       <div className='my-4 h-[1px] bg-gray-300' />
       <Button
         className='flex w-full items-center justify-center bg-orange p-2 text-sm text-white hover:bg-orange/80'
         onClick={handleRemoveAll}
       >
-        Xóa tất cả
+        {t('home.btn_delete_all')}
       </Button>
     </div>
   )

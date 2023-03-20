@@ -1,10 +1,11 @@
-import { useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 // @hook
 import { AppContext } from '@Contexts/app.contexts'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 // @util
 import { userSchema, UserSchema } from '@Utils/rules'
 import { setProfile as setProfileToLS } from '@Utils/auth'
@@ -18,6 +19,7 @@ import DateSelect from '@Pages/User/components/DateSelect/index'
 // api
 import userApi from '@Apis/user.api'
 import InputFile from '@Components/InputFile'
+import { Helmet } from 'react-helmet-async'
 
 type FormData = Pick<UserSchema, 'name' | 'address' | 'phone' | 'date_of_birth' | 'avatar'>
 
@@ -27,6 +29,7 @@ type FormDataError = Omit<FormData, 'date_of_birth'> & {
 
 const profileSchema = userSchema.pick(['name', 'address', 'phone', 'date_of_birth', 'avatar'])
 export default function Profile() {
+  const { t } = useTranslation()
   const methods = useForm<FormData>({
     defaultValues: {
       name: '',
@@ -111,33 +114,37 @@ export default function Profile() {
 
   return (
     <div className='rounded-sm bg-white px-2 pb-10 shadow md:px-7 md:pb-20'>
+      <Helmet>
+        <title>{`${profile?.name ? profile?.name : profile?.email} | Shoppe Clone`} </title>
+        <meta name='description' content='Shopee Việt Nam | Mua và Bán Trên Ứng Dụng Di Động Hoặc Website' />
+      </Helmet>
       <div className='border-b border-b-gray-200 py-6'>
-        <h1 className='text-lg font-medium capitalize text-gray-900'>Hồ Sơ Của Tôi</h1>
-        <div className='mt-1 text-sm text-gray-700'>Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
+        <h1 className='text-lg font-medium capitalize text-gray-900'>{t('profile.txt_my_profile')}</h1>
+        <div className='mt-1 text-sm text-gray-700'>{t('profile.txt_manage_protect')}</div>
       </div>
       <FormProvider {...methods}>
         <form className='mt-8 flex flex-col-reverse md:flex-row md:items-start' onSubmit={onSubmit}>
           <div className='mt-6 flex-grow md:mt-0 md:pr-12'>
             <div className='flex flex-col flex-wrap sm:flex-row'>
-              <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>Email</div>
+              <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>{t('profile.txt_email')}</div>
               <div className='sm:w-[80%] sm:pl-5'>
                 <div className='pt-3 text-gray-700'>{profile?.email}</div>
               </div>
             </div>
             <div className='mt-6 flex flex-col flex-wrap sm:flex-row'>
-              <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>Tên</div>
+              <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>{t('profile.txt_name')}</div>
               <div className='sm:w-[80%] sm:pl-5'>
                 <Input
                   classNameInput='w-full rounded-sm border border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm'
                   register={register}
                   name='name'
-                  placeholder='Tên'
+                  placeholder={`${t('profile.txt_name')}`}
                   errorMessage={errors.name?.message}
                 />
               </div>
             </div>
             <div className='mt-2 flex flex-col flex-wrap sm:flex-row'>
-              <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>Số điện thoại</div>
+              <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>{t('profile.txt_phone')}</div>
               <div className='sm:w-[80%] sm:pl-5'>
                 <Controller
                   control={control}
@@ -145,7 +152,7 @@ export default function Profile() {
                   render={({ field }) => (
                     <InputNumber
                       classNameInput='w-full rounded-sm border border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm'
-                      placeholder='Số điện thoại'
+                      placeholder={`${t('profile.txt_phone')}`}
                       errorMessage={errors.phone?.message}
                       {...field}
                       onChange={field.onChange}
@@ -155,13 +162,13 @@ export default function Profile() {
               </div>
             </div>
             <div className='mt-2 flex flex-col flex-wrap sm:flex-row'>
-              <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>Địa chỉ</div>
+              <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>{t('profile.txt_address')}</div>
               <div className='sm:w-[80%] sm:pl-5'>
                 <Input
                   classNameInput='w-full rounded-sm border border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm'
                   register={register}
                   name='address'
-                  placeholder='Địa chỉ'
+                  placeholder={`${t('profile.txt_address')}`}
                   errorMessage={errors.address?.message}
                 />
               </div>
@@ -184,7 +191,7 @@ export default function Profile() {
                   className='flex h-9 items-center rounded-sm bg-orange px-5 text-center text-sm text-white hover:bg-orange/80'
                   type='submit'
                 >
-                  Lưu
+                  {t('profile.btn_save')}
                 </Button>
               </div>
             </div>
@@ -200,8 +207,8 @@ export default function Profile() {
               </div>
               <InputFile onChange={handleChangeFile} />
               <div className='mt-3 text-gray-400'>
-                <div>Dụng lượng file tối đa 1 MB</div>
-                <div>Định dạng:.JPEG, .PNG</div>
+                <div>{t('profile.txt_size')}</div>
+                <div>{t('profile.txt_extension')}</div>
               </div>
             </div>
           </div>

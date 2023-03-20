@@ -1,4 +1,5 @@
-import React, { Fragment, useRef, useState } from 'react'
+import React, { Fragment, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import config from 'src/constants/config'
 
@@ -7,6 +8,7 @@ interface Props {
 }
 
 export default function InputFile({ onChange }: Props) {
+  const { t } = useTranslation()
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +42,7 @@ export default function InputFile({ onChange }: Props) {
         type='button'
         onClick={handleChangeFile}
       >
-        Chọn ảnh
+        {t('profile.btn_select_image')}
       </button>
     </Fragment>
   )

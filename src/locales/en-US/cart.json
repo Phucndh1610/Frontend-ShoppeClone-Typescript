@@ -1,0 +1,21 @@
+{
+  "cart": {
+    "txt_shopping_cart": "Shopping Cart",
+    "txt_product": "Product",
+    "txt_unit_price": "Unit Price",
+    "txt_quantity": "Quantity",
+    "txt_total_price": "Total Price",
+    "txt_action": "Actions",
+    "txt_total": "Total",
+    "txt_save": "Saved",
+    "txt_your_shopping_cart": "Your shopping cart is empty",
+    "txt_recently_added_products": "recently added products",
+    "txt_add_to_cart": "Add to cart",
+    "txt_no_products_yet": "No Products Yet",
+    "btn_delete": "Delete",
+    "btn_chose_all": "Select All",
+    "btn_buy": "check out",
+    "btn_shopping_now": "Go shopping now",
+    "btn_view_shopping_cart": "view my shopping cart"
+  }
+}

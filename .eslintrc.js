@@ -43,7 +43,8 @@ module.exports = {
           ['@Apis', './src/apis'],
           ['@Contexts', './src/contexts'],
           ['@Hooks', './src/hooks'],
-          ['@Constants, ./src/constants']
+          ['@Constants', './src/constants'],
+          ['@Locales', './src/locales']
         ]
       }
     }
