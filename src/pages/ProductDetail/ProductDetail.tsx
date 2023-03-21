@@ -18,7 +18,7 @@ import { AppContext } from '@Contexts/app.contexts'
 import { Helmet } from 'react-helmet-async'
 
 export default function ProductDetail() {
-  const { nameId, productId } = useParams()
+  const { nameId } = useParams()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const { isAuthenticated } = useContext(AppContext)
