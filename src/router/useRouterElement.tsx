@@ -1,4 +1,4 @@
-import { Suspense, useContext, lazy } from 'react'
+import { Suspense, useContext, lazy, Children } from 'react'
 import { AppContext } from '@Contexts/app.contexts'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import path from 'src/constants/path'
@@ -32,36 +32,36 @@ function RejectedRoute() {
 export default function useRouterElements() {
   const routerElements = useRoutes([
     {
-      path: path.home,
-      index: true,
-      element: (
-        <MainLayout>
-          <Suspense>
-            <ProductList />
-          </Suspense>
-        </MainLayout>
-      )
-    },
-    {
-      path: path.productDetail,
-      element: (
-        <MainLayout>
-          <Suspense>
-            <ProductDetail />
-          </Suspense>
-        </MainLayout>
-      )
-    },
-    {
-      path: '*',
-      index: true,
-      element: (
-        <MainLayout>
-          <Suspense>
-            <NotFound />
-          </Suspense>
-        </MainLayout>
-      )
+      path: '',
+      element: <MainLayout />,
+      children: [
+        {
+          path: path.home,
+          index: true,
+          element: (
+            <Suspense>
+              <ProductList />
+            </Suspense>
+          )
+        },
+        {
+          path: path.productDetail,
+          element: (
+            <Suspense>
+              <ProductDetail />
+            </Suspense>
+          )
+        },
+        {
+          path: '*',
+          index: true,
+          element: (
+            <Suspense>
+              <NotFound />
+            </Suspense>
+          )
+        }
+      ]
     },
     {
       path: '',
@@ -69,35 +69,37 @@ export default function useRouterElements() {
       children: [
         {
           path: path.user,
-          element: (
-            <MainLayout>
-              <UserLayout />
-            </MainLayout>
-          ),
+          element: <MainLayout />,
           children: [
             {
-              path: path.profile,
-              element: (
-                <Suspense>
-                  <Profile />
-                </Suspense>
-              )
-            },
-            {
-              path: path.changePassword,
-              element: (
-                <Suspense>
-                  <ChangePassword />
-                </Suspense>
-              )
-            },
-            {
-              path: path.historyPurchase,
-              element: (
-                <Suspense>
-                  <HistoryPurchase />
-                </Suspense>
-              )
+              path: '',
+              element: <UserLayout />,
+              children: [
+                {
+                  path: path.profile,
+                  element: (
+                    <Suspense>
+                      <Profile />
+                    </Suspense>
+                  )
+                },
+                {
+                  path: path.changePassword,
+                  element: (
+                    <Suspense>
+                      <ChangePassword />
+                    </Suspense>
+                  )
+                },
+                {
+                  path: path.historyPurchase,
+                  element: (
+                    <Suspense>
+                      <HistoryPurchase />
+                    </Suspense>
+                  )
+                }
+              ]
             }
           ]
         },
@@ -118,24 +120,26 @@ export default function useRouterElements() {
       element: <RejectedRoute />,
       children: [
         {
-          path: path.login,
-          element: (
-            <RegisterLayout>
-              <Suspense>
-                <Login />
-              </Suspense>
-            </RegisterLayout>
-          )
-        },
-        {
-          path: path.register,
-          element: (
-            <RegisterLayout>
-              <Suspense>
-                <Register />
-              </Suspense>
-            </RegisterLayout>
-          )
+          path: '',
+          element: <RegisterLayout />,
+          children: [
+            {
+              path: path.login,
+              element: (
+                <Suspense>
+                  <Login />
+                </Suspense>
+              )
+            },
+            {
+              path: path.register,
+              element: (
+                <Suspense>
+                  <Register />
+                </Suspense>
+              )
+            }
+          ]
         }
       ]
     }
