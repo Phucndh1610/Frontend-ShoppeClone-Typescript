@@ -18,7 +18,7 @@ export default function NotFound() {
             to={path.home}
             className='active:text-orange-500 group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring'
           >
-            <span className='absolute inset-0 translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] transition-transform group-hover:translate-y-0 group-hover:translate-x-0' />
+            <span className='absolute inset-0 translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] transition-transform group-hover:translate-x-0 group-hover:translate-y-0' />
             <span className='relative block border border-current px-8 py-3'>
               <span>Go Home</span>
             </span>

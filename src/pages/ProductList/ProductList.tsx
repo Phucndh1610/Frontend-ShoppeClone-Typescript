@@ -61,7 +61,7 @@ export default function ProductList() {
           )}
           {isLoading && (
             <div className='col-span-9'>
-              <div className='h-[64px] w-full animate-pulse bg-gray-300/40 py-4 px-3'></div>
+              <div className='h-[64px] w-full animate-pulse bg-gray-300/40 px-3 py-4'></div>
               <div className='xl:grid-col-5 mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4'>
                 {new Array(8).fill(null).map((_val, index) => (
                   <SkeletonProduct key={index} />
