@@ -66,7 +66,7 @@ export default function ChangePassword() {
         <h1 className='text-lg font-medium capitalize text-gray-900'>{t('profile.txt_my_profile')}</h1>
         <div className='mt-1 text-sm text-gray-700'>{t('profile.txt_manage_protect')}</div>
       </div>
-      <form className='mt-8 mr-auto max-w-2xl' onSubmit={onSubmit}>
+      <form className='mr-auto mt-8 max-w-2xl' onSubmit={onSubmit}>
         <div className='mt-6 flex-grow md:mt-0 md:pr-12'>
           <div className='mt-2 flex flex-col flex-wrap sm:flex-row'>
             <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>{t('profile.txt_old_pass')}</div>

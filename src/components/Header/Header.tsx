@@ -27,7 +27,7 @@ export default function Header() {
   const { onSubmitSearch, register } = useSearchProducts()
 
   return (
-    <header className='bg-[linear-gradient(-180deg,#f53d2d,#f63)] pt-2 pb-5 text-white'>
+    <header className='bg-[linear-gradient(-180deg,#f53d2d,#f63)] pb-5 pt-2 text-white'>
       <div className='container'>
         <NavHeader />
         <div className='mt-4 grid grid-cols-12 items-end gap-4'>
@@ -46,7 +46,7 @@ export default function Header() {
                 placeholder='Free ship từ 0 đồng'
                 {...register('name')}
               />
-              <button className='flex-shrink-0 rounded-sm bg-orange py-2 px-6 hover:opacity-90' type='submit'>
+              <button className='flex-shrink-0 rounded-sm bg-orange px-6 py-2 hover:opacity-90' type='submit'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -127,7 +127,7 @@ export default function Header() {
                   />
                 </svg>
                 {purchaseInCart && purchaseInCart.length > 0 && (
-                  <span className='absolute top-[-5px] right-[-7px] rounded-full bg-white px-[9px] py-[1px] text-xs text-orange'>
+                  <span className='absolute right-[-7px] top-[-5px] rounded-full bg-white px-[9px] py-[1px] text-xs text-orange'>
                     {purchaseInCart?.length}
                   </span>
                 )}
